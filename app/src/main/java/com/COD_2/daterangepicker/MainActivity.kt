@@ -22,9 +22,28 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun showDataRangePicker() {
+     val dateRangePicker =
+            MaterialDatePicker
+                .Builder.dateRangePicker()
+                .setTitleText("Select Date")
+                .build()
 
+        dateRangePicker.show(
+            supportFragmentManager,
+            "date_range_picker"
+        )
 
-        
+        dateRangePicker.addOnPositiveButtonClickListener { dateSelected ->
+
+            val startDate = dateSelected.first
+            val endDate = dateSelected.second
+
+            if (startDate != null && endDate != null) {
+                binding.tvRangeDate.text =
+                    "Reserved\nStartDate: ${convertLongToTime(startDate)}\n" +
+                            "EndDate: ${convertLongToTime(endDate)}"
+            }
+        }  
     }
 
 
